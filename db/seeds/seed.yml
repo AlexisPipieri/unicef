@@ -1,8 +1,28 @@
-users:
-  -
-
 ecoles:
-  -
-
+  - nom: Voltaire
+    adresse: 100 Boulevard Voltaire 75011 Paris
+    responsable: Monsieur Martin
+    email: ecolevoltaire@wanadoo.fr
+themes:
+  - nom: esclavagisme
+users:
+  - prenom: Marie
+    nom: Clafoutis
+    tel: 0102030405
+    password: 123456
+    email: marie.clafoutis@mail.com
+    niveau: débutant
+    admin: true
+  - prenom: Alexandre
+    nom: Connard
+    tel: 0102030405
+    password: 123456
+    email: alex.connard@mail.com
+    niveau: confirmé
+    admin: false
 interventions:
-  -
+  - date_contact: 01/06/2018
+    date_intervention: 10/09/2018
+    statut: En cours
+    theme: esclavagisme
+    ecole: Voltaire
