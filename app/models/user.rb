@@ -4,5 +4,5 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   belongs_to :theme
-  has_many :plaideur_interventions
+  has_many :plaideur_interventions, dependent: :destroy
 end
