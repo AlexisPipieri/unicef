@@ -10,10 +10,55 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_07_135316) do
+ActiveRecord::Schema.define(version: 2018_06_07_141842) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "ecoles", force: :cascade do |t|
+    t.string "nom"
+    t.string "adresse"
+    t.string "responsable"
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "interventions", force: :cascade do |t|
+    t.string "date_contact"
+    t.string "date_intervention"
+    t.string "statut"
+    t.bigint "theme_id"
+    t.bigint "ecole_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ecole_id"], name: "index_interventions_on_ecole_id"
+    t.index ["theme_id"], name: "index_interventions_on_theme_id"
+  end
+
+  create_table "plaideur_interventions", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "intervention_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["intervention_id"], name: "index_plaideur_interventions_on_intervention_id"
+    t.index ["user_id"], name: "index_plaideur_interventions_on_user_id"
+  end
+
+  create_table "professeurs", force: :cascade do |t|
+    t.string "nom"
+    t.string "prenom"
+    t.bigint "ecole_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ecole_id"], name: "index_professeurs_on_ecole_id"
+  end
+
+  create_table "themes", force: :cascade do |t|
+    t.string "nom"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -28,8 +73,21 @@ ActiveRecord::Schema.define(version: 2018_06_07_135316) do
     t.inet "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "prenom"
+    t.string "nom"
+    t.string "tel"
+    t.boolean "admin"
+    t.string "niveau"
+    t.bigint "theme_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["theme_id"], name: "index_users_on_theme_id"
   end
 
+  add_foreign_key "interventions", "ecoles"
+  add_foreign_key "interventions", "themes"
+  add_foreign_key "plaideur_interventions", "interventions"
+  add_foreign_key "plaideur_interventions", "users"
+  add_foreign_key "professeurs", "ecoles"
+  add_foreign_key "users", "themes"
 end
