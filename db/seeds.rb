@@ -12,6 +12,8 @@ puts 'Destroying PlaideurInterventions...'
 PlaideurIntervention.destroy_all
 puts 'Destroying users...'
 User.destroy_all
+puts 'Destroying plaideur_interventions'
+PlaideurIntervention.destroy_all
 
 file = Rails.root.join('db', 'seeds', 'seed.yml')
 sample = YAML.load(open(file).read)
@@ -43,6 +45,16 @@ sample["interventions"].each do |intervention|
   interventions[intervention] = Intervention.create! intervention.slice("date_contact",
     "date_intervention", "statut", "theme", "ecole").merge(theme: theme).merge(ecole: ecole)
 end
+
+# puts 'Creating plaideur_interventions...'
+# plaideur_interventions = {}
+#   sample["plaideur_interventions"].each do |plaideur_intervention|
+#     user = users[plaideur_intervention["user"]]
+#     intervention = interventions[plaideur_intervention["intervention"]]
+#     plaideur_interventions[plaideur_intervention] = PlaideurIntervention.create! plaideur_intervention.slice(
+#       "user", "intervention").merge(user: user).merge(intervention: intervention)
+#   end
+
 
 puts 'Finished!'
 

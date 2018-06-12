@@ -1,0 +1,8 @@
+<h1>Toutes les interventions</h1>
+
+<% @interventions.each do |intervention| %>
+  Date de l'intervention : <%= intervention.date_intervention %> <br>
+  Thème : <%= intervention.theme.nom %> <br>
+  Plaideur : <%= User.find(intervention.plaideur_interventions.first.user_id).prenom %> <br><br>
+
+<% end %>
