@@ -4,5 +4,13 @@ class Intervention < ApplicationRecord
   has_many :plaideur_interventions, dependent: :destroy
 
   include PgSearch
-  multisearchable against: [ :statut, :date_intervention, :date_contact ]
+  pg_search_scope :search_interventions,
+    against: [ :date_contact, :date_intervention, :statut],
+    associated_against: {
+      ecole: [ :nom, :adresse, :responsable, :email],
+      theme: [:nom]
+    },
+    using: {
+      tsearch: { prefix: true }
+    }
 end

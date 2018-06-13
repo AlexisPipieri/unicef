@@ -6,6 +6,4 @@ class User < ApplicationRecord
   belongs_to :theme, optional: true
   has_many :plaideur_interventions, dependent: :destroy
 
-  include PgSearch
-  multisearchable against: [ :prenom, :nom, :niveau, :email]
 end

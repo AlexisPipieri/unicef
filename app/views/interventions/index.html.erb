@@ -1,19 +1,24 @@
-<h1>Toutes les interventions</h1>
+<div class="container">
+  <h1>Toutes les interventions</h1>
 
-    <div class="search-form" >
-      <%= form_tag root_path, method: :get do %>
-      <div class="input-group">
-        <input type="text" class="form-control" id="input-home-search" placeholder="Chercher une intervention" name="query">
-        <span class="input-group-btn">
-          <button class="btn btn-primary" type="button" id="btn-home-search" >Search</button>
-        </span>
+      <div class="search-form" >
+        <%= form_tag interventions_path, method: :get do %>
+        <div class="input-group">
+          <input type="text" class="form-control" id="input-interventions-search" placeholder="Chercher une intervention" name="query">
+          <span class="input-group-btn">
+            <button class="btn btn-primary" type="button" id="btn-interventions-search" >Chercher</button>
+          </span>
+        </div>
+        <% end %>
       </div>
-      <% end %>
-    </div>
 
-<% @interventions.each do |intervention| %>
-  Date de l'intervention : <%= intervention.date_intervention %> <br>
-  Thème : <%= intervention.theme.nom %> <br>
-  Plaideur : <%= User.find(intervention.plaideur_interventions.first.user_id).prenom %> <br><br>
+  <% @interventions.each do |intervention| %>
+    École: <%= intervention.ecole.nom %> <br>
+    Date de l'intervention : <%= intervention.date_intervention %> <br>
+    Thème : <%= intervention.theme.nom %> <br>
+    <% unless intervention.plaideur_interventions.first.nil? %>
+      Plaideur : <%= "#{User.find(intervention.plaideur_interventions.first.user_id).prenom} #{User.find(intervention.plaideur_interventions.first.user_id).nom}" %> <br><br>
+    <% end %>
 
-<% end %>
+  <% end %>
+</div>

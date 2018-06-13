@@ -3,6 +3,9 @@ class InterventionsController < ApplicationController
   def index
     @interventions = Intervention.all
     # raise
+    if params[:query] && params[:query] != ''
+      @interventions = @interventions.search_interventions(params[:query])
+    end
   end
 
 end
