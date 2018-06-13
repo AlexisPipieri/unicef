@@ -1,5 +1,16 @@
 <h1>Toutes les interventions</h1>
 
+    <div class="search-form" >
+      <%= form_tag root_path, method: :get do %>
+      <div class="input-group">
+        <input type="text" class="form-control" id="input-home-search" placeholder="Chercher une intervention" name="query">
+        <span class="input-group-btn">
+          <button class="btn btn-primary" type="button" id="btn-home-search" >Search</button>
+        </span>
+      </div>
+      <% end %>
+    </div>
+
 <% @interventions.each do |intervention| %>
   Date de l'intervention : <%= intervention.date_intervention %> <br>
   Thème : <%= intervention.theme.nom %> <br>
