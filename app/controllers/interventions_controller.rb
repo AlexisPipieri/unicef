@@ -18,4 +18,13 @@ class InterventionsController < ApplicationController
       end
     end
   end
+
+  def new
+    @intervention = Intervention.new
+    @theme_list = Theme.all
+  end
+
+  def create
+  end
+
 end
