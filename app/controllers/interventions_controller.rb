@@ -23,6 +23,7 @@ class InterventionsController < ApplicationController
   def show
     @intervention = Intervention.find(params[:id])
     @plaideurintervention = PlaideurIntervention.new
+    @users_list = User.all
   end
 
 

@@ -1,3 +1,5 @@
+<%= link_to "Back to interventions", interventions_path %>
+
 <div class="container">
   date: <%= @intervention.date_intervention %>
 
@@ -5,7 +7,8 @@
     Plaideur: <%= plaideur.nom %>
   <% end %>
   <%= simple_form_for [@intervention, @plaideurintervention], :url => intervention_plaideurinterventions_path(@intervention), :method => :post do |f| %>
-    <%= f.input :user_id %>
+    <%#= f.input :user_id %>
+    <%= f.association :user, collection: @users_list, :label_method => lambda { |plaideur| "#{plaideur.prenom} #{plaideur.nom}"} %>
     <%= f.button :submit, class: 'btn-primary'%>
   <% end %>
 </div>
