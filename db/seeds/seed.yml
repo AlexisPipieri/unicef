@@ -7,8 +7,13 @@ ecoles:
     adresse: 52 Rue Saint Maur 75011 Paris
     responsable: Madame Dupont
     email: ecole-hugo@gmail.com
+  - nom: Michelet
+    adresse: 100 Boulevard Michelet 75020 Paris
+    responsable: Monsieur Dupont
+    email: ecolemichelet@wanadoo.fr
 themes:
   - nom: esclavagisme
+  - nom: pauvreté
 users:
   - prenom: Marie
     nom: Clafoutis
@@ -30,3 +35,13 @@ interventions:
     statut: En cours
     theme: esclavagisme
     ecole: Voltaire
+  - date_contact: 10/05/2018
+    date_intervention: 27/10/2018
+    statut: Non-assigné
+    theme: pauvreté
+    ecole: Michelet
+plaideur_interventions:
+  - user: Clafoutis
+    intervention: "01/06/2018"
+  - user: Connard
+    intervention: "01/06/2018"

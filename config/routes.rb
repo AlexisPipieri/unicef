@@ -6,5 +6,6 @@ Rails.application.routes.draw do
   resources :interventions, except: [:destroy]
   resources :ecoles, except: [:destroy]
   resources :users, except: [:destroy]
+  resources :plaideurinterventions, except: [:show, :index]
 
 end
