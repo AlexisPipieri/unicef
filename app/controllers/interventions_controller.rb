@@ -22,7 +22,7 @@ class InterventionsController < ApplicationController
 
   def show
     @intervention = Intervention.find(params[:id])
-    @plaideurintervention = PlaideurIntervention.new(intervention: @intervention)
+    @plaideurintervention = PlaideurIntervention.new
   end
 
 
