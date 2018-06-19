@@ -3,6 +3,10 @@ ecoles:
     adresse: 100 Boulevard Voltaire 75011 Paris
     responsable: Monsieur Martin
     email: ecolevoltaire@wanadoo.fr
+  - nom: Victor hugo
+    adresse: 52 Rue Saint Maur 75011 Paris
+    responsable: Madame Dupont
+    email: ecole-hugo@gmail.com
 themes:
   - nom: esclavagisme
 users:

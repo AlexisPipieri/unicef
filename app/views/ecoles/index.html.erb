@@ -1,0 +1,10 @@
+<h1>Liste des écoles</h1>
+
+<ul>
+  <% @ecoles.each do |ecole| %>
+    <li>
+      <p><%= ecole.nom %></p>
+      <p><%= ecole.adresse %></p>
+    </li>
+  <% end %>
+</ul>

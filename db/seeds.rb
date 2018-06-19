@@ -1,11 +1,11 @@
 require 'yaml'
 
+puts 'Destroying interventions...'
+Intervention.destroy_all
 puts 'Destroying ecoles...'
 Ecole.destroy_all
 puts 'Destroying professeurs...'
 Professeur.destroy_all
-puts 'Destroying interventions...'
-Intervention.destroy_all
 puts 'Destroying themes...'
 Theme.destroy_all
 puts 'Destroying PlaideurInterventions...'
