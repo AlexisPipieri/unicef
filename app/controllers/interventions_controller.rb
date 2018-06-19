@@ -17,8 +17,5 @@ class InterventionsController < ApplicationController
         @interventions = @interventions.search_interventions(params[:query])
       end
     end
-
-    # mettre un scope de pgsearch dans plaideurintervention. Si le premier scope ne renvoie rien, alors chercher avec le deuxième scope
   end
-
 end
