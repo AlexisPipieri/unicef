@@ -1,13 +1,14 @@
 École: <%= intervention.ecole.nom %> <br>
 Date de l'intervention : <%= intervention.date_intervention %> <br>
 Thème : <%= intervention.theme.nom %> <br>
-Statut: <%= intervention.statut %> <br>
-<!-- au cas ou l'intervention n'a pas de plaideur assigné -->
-<% unless intervention.plaideur_interventions.first.nil? %>
-  <% intervention.plaideur_interventions.each do |plaideurintervention| %>
-    Plaideur : <%= "#{User.find(plaideurintervention.user_id).prenom} #{User.find(plaideurintervention.user_id).nom}" %> <br>
+Statut : <%= intervention.statut %> <br>
+<% unless intervention.users.empty? %>
+  <% intervention.users.each do |plaideur| %>
+    Plaideur : <%= "#{plaideur.prenom} #{plaideur.nom}" %> <br>
   <% end %>
 <% end %>
+
+<!-- au cas ou l'intervention n'a pas de plaideur assigné -->
 <div class="btn btn-primary">
   <%= link_to "Assigner", new_plaideurintervention_path  %>
 </div>

@@ -5,5 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   belongs_to :theme, optional: true
   has_many :plaideur_interventions, dependent: :destroy
-
+  has_many :interventions, through: :plaideur_interventions
 end
