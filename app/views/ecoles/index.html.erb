@@ -1,10 +1,12 @@
-<h1>Liste des écoles</h1>
-
-<ul>
+<div class="container">
+  <h1>Toutes les écoles</h1>
+  <div class="search-form" >
+    <%= form_tag ecoles_path, method: :get do %>
+      <input type="text" class="form-control" id="input-ecoles-search" placeholder="Chercher une école" name="query">
+    <% end %>
+  </div>
   <% @ecoles.each do |ecole| %>
-    <li>
-      <p><%= ecole.nom %></p>
-      <p><%= ecole.adresse %></p>
-    </li>
+    <%= render "shared/ecole_card", ecole: ecole %>
   <% end %>
-</ul>
+
+</div>
