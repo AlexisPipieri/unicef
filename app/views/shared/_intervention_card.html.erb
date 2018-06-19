@@ -9,9 +9,14 @@ Statut : <%= intervention.statut %> <br>
 <% end %>
 
 <!-- au cas ou l'intervention n'a pas de plaideur assigné -->
-<div class="btn btn-primary">
-  <%= link_to "Assigner", new_plaideurintervention_path  %>
-</div>
+<%= form_for(@plaideurintervention) do |f| %>
+  <%= f.label :intervention_id %>
+  <%= f.text_field :intervention_id %>
+  <%= f.label :user_id %>
+  <%= f.text_field :user_id %>
+  <%= f.submit %>
+<% end %>
+
 
 <br>
 <br>
