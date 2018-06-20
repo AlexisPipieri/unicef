@@ -15,14 +15,15 @@
     Statut : <%= intervention.statut %> <br>
     <% unless intervention.users.empty? %>
       <% intervention.users.each do |plaideur| %>
-        Plaideur : <%= "#{plaideur.prenom} #{plaideur.nom}" %> <br>
+        Plaideur : <%= "#{plaideur.prenom} #{plaideur.nom}" %>
+        <% plaideurintervention_instance = PlaideurIntervention.where(intervention_id: intervention.id).where(user_id: plaideur.id).first %>
+        <%= link_to 'Enlever le plaideur', plaideurintervention_path(plaideurintervention_instance), :method => :delete %>
+        <br>
       <% end %>
     <% end %>
-    <%= link_to "lien", intervention_path(intervention) %>
     <%= simple_form_for @plaideurintervention, :url => plaideurinterventions_path, :method => :post do |f| %>
       <%= f.association :user, collection: @users_list%>
       <%= f.input :intervention_id, :as => :hidden, :input_html => { :value => intervention.id } %>
-      <%= f.association :intervention, collection: @interventions_list%>
       <%= f.button :submit,'Assigner', class: 'btn-primary'%>
     <% end %>
     <br>
@@ -30,5 +31,6 @@
   <% end %>
 
 </div>
+
 
 
