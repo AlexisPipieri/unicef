@@ -6,4 +6,10 @@ class User < ApplicationRecord
   belongs_to :theme, optional: true
   has_many :plaideur_interventions, dependent: :destroy
   has_many :interventions, through: :plaideur_interventions
+
+  def to_label
+    # method to display the name in simple form association when creating an intervention
+    "#{id} - #{prenom} #{nom}"
+  end
+
 end
