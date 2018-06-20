@@ -4,10 +4,9 @@
   date: <%= @intervention.date_intervention %>
 
   <% @intervention.users.each do |plaideur|%>
-    Plaideur: <%= plaideur.nom %>
+    Plaideur: <%= "#{plaideur.prenom} #{plaideur.nom}" %>
   <% end %>
   <%= simple_form_for [@intervention, @plaideurintervention], :url => intervention_plaideurinterventions_path(@intervention), :method => :post do |f| %>
-    <%#= f.input :user_id %>
     <%= f.association :user, collection: @users_list%>
     <%= f.button :submit,'Assigner', class: 'btn-primary'%>
   <% end %>

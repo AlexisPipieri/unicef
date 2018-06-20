@@ -1,0 +1,13 @@
+<%= simple_form_for [intervention, plaideurintervention], :url => intervention_plaideurinterventions_path(intervention), :method => :post do |f| %>
+    <% if plaideurintervention.errors.any? %>
+      <div class="errors-container">
+        <ul>
+          <% plaideurintervention.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <%= f.association :user, collection: @users_list%>
+    <%= f.button :submit,'Assigner', class: 'btn-primary'%>
+  <% end %>

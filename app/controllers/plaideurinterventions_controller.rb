@@ -6,8 +6,11 @@ class PlaideurinterventionsController < ApplicationController
     intervention = Intervention.find(params[:intervention_id])
     plaideur = User.find(params[:plaideur_intervention][:user_id])
     @plaideurintervention = PlaideurIntervention.new(intervention: intervention, user: plaideur)
-    @plaideurintervention.save!
-    redirect_to interventions_path
+    if @plaideurintervention.save
+      redirect_to interventions_path
+    else
+      redirect_to request.referrer
+    end
   end
 
   # on récupère l'user id dans les params, mais pas l'intervention id...
