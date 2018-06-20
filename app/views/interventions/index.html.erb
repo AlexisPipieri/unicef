@@ -6,8 +6,23 @@
       <input type="text" class="form-control" id="input-interventions-search" placeholder="Chercher une intervention" name="query">
     <% end %>
   </div>
+
   <% @interventions.each do |intervention| %>
-    <%= render "shared/intervention_card", intervention: intervention %>
+    <%# = render "shared/intervention_card", intervention: intervention %>
+    École: <%= intervention.ecole.nom %> <br>
+    Date de l'intervention : <%= intervention.date_intervention %> <br>
+    Thème : <%= intervention.theme.nom %> <br>
+    Statut : <%= intervention.statut %> <br>
+    <% unless intervention.users.empty? %>
+      <% intervention.users.each do |plaideur| %>
+        Plaideur : <%= "#{plaideur.prenom} #{plaideur.nom}" %> <br>
+      <% end %>
+    <% end %>
+    <%= link_to "lien" , intervention_path(intervention)  %>
+    <br>
+    <br>
   <% end %>
 
 </div>
+
+
