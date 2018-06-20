@@ -12,4 +12,8 @@ class User < ApplicationRecord
     "#{prenom} #{nom}"
   end
 
+  def nom_complet
+    "#{prenom} #{nom}"
+  end
+
 end

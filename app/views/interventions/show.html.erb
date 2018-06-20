@@ -4,6 +4,8 @@
   Date de l'intervention : <%= @intervention.date_intervention %> <br>
   Plaideurs :
   <ul>
-    <%= @intervention.users %>
+    <% @intervention.users.each do |plaideur| %>
+      <li><%= plaideur.nom_complet %></li>
+    <% end %>
   </ul>
 </div>
