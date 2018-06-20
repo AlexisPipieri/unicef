@@ -1,11 +1,12 @@
 class InterventionsController < ApplicationController
   skip_before_action :authenticate_user! # À enlever pour la mise en prod
+
   def index
     @interventions = Intervention.all
-    plaideurinterventions = PlaideurIntervention.all
-    # raise
+    # search
     if params[:query] && params[:query] != ''
       if @interventions.search_interventions(params[:query]).empty?
+        plaideurinterventions = PlaideurIntervention.all
         matching_interventions = []
         plaideurinterventions = plaideurinterventions.search_plaideur(params[:query])
         plaideurinterventions.each do |plaideurintervention|
@@ -18,4 +19,13 @@ class InterventionsController < ApplicationController
       end
     end
   end
+
+  def show
+    @intervention = Intervention.find(params[:id])
+    @plaideurintervention = PlaideurIntervention.new
+    @users_list = User.all
+  end
+
+
+
 end
