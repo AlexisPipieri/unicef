@@ -3,7 +3,7 @@ class PlaideurinterventionsController < ApplicationController
 
 
   def create
-    intervention = Intervention.find(params[:intervention_id])
+    intervention = Intervention.find(params[:plaideur_intervention][:intervention_id])
     plaideur = User.find(params[:plaideur_intervention][:user_id])
     @plaideurintervention = PlaideurIntervention.new(intervention: intervention, user: plaideur)
     @plaideurintervention.save!

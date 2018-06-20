@@ -3,6 +3,7 @@ class InterventionsController < ApplicationController
 
   def index
     @interventions = Intervention.all
+    @plaideurintervention = PlaideurIntervention.new
     # search
     if params[:query] && params[:query] != ''
       if @interventions.search_interventions(params[:query]).empty?
@@ -18,6 +19,10 @@ class InterventionsController < ApplicationController
         @interventions = @interventions.search_interventions(params[:query])
       end
     end
+
+    # assign
+    @users_list = User.all
+    @interventions_list = Intervention.all
   end
 
   def show

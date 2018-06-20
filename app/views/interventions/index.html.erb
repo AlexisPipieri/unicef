@@ -18,7 +18,13 @@
         Plaideur : <%= "#{plaideur.prenom} #{plaideur.nom}" %> <br>
       <% end %>
     <% end %>
-    <%= link_to "lien" , intervention_path(intervention)  %>
+    <%= link_to "lien", intervention_path(intervention) %>
+    <%= simple_form_for @plaideurintervention, :url => plaideurinterventions_path, :method => :post do |f| %>
+      <%= f.association :user, collection: @users_list%>
+      <%= f.input :intervention_id, :as => :hidden, :input_html => { :value => intervention.id } %>
+      <%= f.association :intervention, collection: @interventions_list%>
+      <%= f.button :submit,'Assigner', class: 'btn-primary'%>
+    <% end %>
     <br>
     <br>
   <% end %>
