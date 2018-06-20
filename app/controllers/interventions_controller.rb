@@ -31,6 +31,13 @@ class InterventionsController < ApplicationController
   def create
     @intervention = Intervention.new(intervention_params)
     if @intervention.save
+      # if user selects a plaideur, then create an instance of plaideurintervention
+      unless params[:intervention][:user_ids].empty?
+        plaideur = User.find(params[:intervention][:user_ids])
+        @plaideurintervention = PlaideurIntervention.new(intervention: @intervention,
+         user: plaideur)
+        @plaideurintervention.save
+      end
       redirect_to intervention_path(@intervention)
     else
       render :new
