@@ -2,9 +2,12 @@
   <h1>Ajouter une intervention</h1>
 
   <%= simple_form_for @intervention do |f| %>
+    <%= f.association :ecole %>
     <%= f.association :theme, collection: @theme_list %>
     <%= f.input :date_intervention, input_html: {class: "datepicker"} %>
+    <%= f.association :users, as: :collection_select %>
     <%= f.submit "Ajouter", class: "btn btn-primary" %>
+
   <% end %>
 
 </div>

@@ -19,12 +19,33 @@ class InterventionsController < ApplicationController
     end
   end
 
+  def show
+    @intervention = Intervention.find(params[:id])
+  end
+
   def new
     @intervention = Intervention.new
     @theme_list = Theme.all
   end
 
   def create
+    @intervention = Intervention.new(intervention_params)
+    if @intervention.save
+      redirect_to intervention_path(@intervention)
+    else
+      render :new
+    end
+  end
+
+  def plaideurs
+    # code to have access to plaideurs of an intervention
+  end
+
+  private
+
+  def intervention_params
+    params.require(:intervention).permit(:date_contact, :date_intervention,
+      :theme_id, :ecole_id)
   end
 
 end

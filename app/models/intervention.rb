@@ -2,6 +2,8 @@ class Intervention < ApplicationRecord
   belongs_to :theme
   belongs_to :ecole
   has_many :plaideur_interventions, dependent: :destroy
+  has_many :users, through: :plaideur_interventions
+
 
   include PgSearch
   pg_search_scope :search_interventions,
