@@ -3,9 +3,7 @@ class PlaideurinterventionsController < ApplicationController
 
 
   def create
-    intervention = Intervention.find(params[:plaideur_intervention][:intervention_id])
-    plaideur = User.find(params[:plaideur_intervention][:user_id])
-    @plaideurintervention = PlaideurIntervention.new(intervention: intervention, user: plaideur)
+    @plaideurintervention = PlaideurIntervention.new(plaideurintervention_params)
     if @plaideurintervention.save
       redirect_to interventions_path
     else
@@ -21,8 +19,9 @@ class PlaideurinterventionsController < ApplicationController
 
   private
 
-  # def plaideurintervention_params
-  #   params.require(:plaideur_intervention).permit(:user_id).permit(:intervention_id)
-  # end
+  def plaideurintervention_params
+    params.require(:plaideur_intervention).permit(:user_id, :intervention_id)
+
+  end
 
 end
