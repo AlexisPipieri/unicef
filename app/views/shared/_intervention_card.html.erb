@@ -1,24 +1,39 @@
-Date de l'intervention : <%= intervention.date_intervention %>
-
-Thème : <%= intervention.theme.nom %>
-
-École: <%= intervention.ecole.nom %>
-
-Statut : <%= intervention.statut %>
-
-<% unless intervention.users.empty? %>
-  <% intervention.users.each do |plaideur| %>
-    Plaideur : <%= "#{plaideur.prenom} #{plaideur.nom}" %>
-    <% plaideurintervention_instance = PlaideurIntervention.where(intervention_id: intervention.id).where(user_id: plaideur.id).first %>
-    <%= link_to plaideurintervention_path(plaideurintervention_instance), :method => :delete do %>
-      <i class="far fa-trash-alt"></i>
+<div class="card intervention-card">
+  <div class="intervention-card-essentiels">
+    <div class="intervention-section intervention-card-date">
+      <strong>Date de l'intervention :</strong> <%= intervention.date_intervention %>
+    </div>
+    <div class="intervention-section intervention-card-theme">
+      <strong>Thème :</strong> <%= intervention.theme.nom %>
+    </div>
+    <div class="intervention-section intervention-card-statut">
+      <strong>Statut :</strong> <%= intervention.statut %>
+    </div>
+  </div>
+  <div class="intervention-section intervention-card-ecole">
+    <strong>École :</strong> <%= intervention.ecole.nom %> <br>
+    <%= intervention.ecole.adresse %> <br>
+    <strong>Responsable :</strong> <%= intervention.ecole.responsable %> (<%= intervention.ecole.email %>) <br>
+  </div>
+  <div class="intervention-card-assign-container">
+    <div class="intervention-section intervention-card-all-plaideurs">
+      <% unless intervention.users.empty? %>
+        <% intervention.users.each do |plaideur| %>
+          <div class="intervention-card-plaideur">
+            <strong>Plaideur :</strong> <%= "#{plaideur.prenom} #{plaideur.nom}" %>
+            <% plaideurintervention_instance = PlaideurIntervention.where(intervention_id: intervention.id).where(user_id: plaideur.id).first %>
+            <%= link_to plaideurintervention_path(plaideurintervention_instance), :method => :delete do %>
+              <i class="fas fa-times"></i>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <%= simple_form_for @plaideurintervention, :url => plaideurinterventions_path, :method => :post do |f| %>
+      <%= f.association :user, collection: @users_list, class: "intervention-section" %>
+      <%= f.input :intervention_id, :as => :hidden, :input_html => { :value => intervention.id } %>
+      <%= f.button :submit,'Assigner', class: 'btn-primary'%>
     <% end %>
-  <% end %>
-<% end %>
+  </div>
 
-<%= simple_form_for @plaideurintervention, :url => plaideurinterventions_path, :method => :post do |f| %>
-  <%= f.association :user, collection: @users_list%>
-  <%= f.input :intervention_id, :as => :hidden, :input_html => { :value => intervention.id } %>
-  <%= f.button :submit,'Assigner', class: 'btn-primary'%>
-<% end %>
-
+</div>
