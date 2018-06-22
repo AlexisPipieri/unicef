@@ -1,24 +1,24 @@
-École: <%= intervention.ecole.nom %> <br>
-Date de l'intervention : <%= intervention.date_intervention %> <br>
-Thème : <%= intervention.theme.nom %> <br>
-Statut : <%= intervention.statut %> <br>
+Date de l'intervention : <%= intervention.date_intervention %>
+
+Thème : <%= intervention.theme.nom %>
+
+École: <%= intervention.ecole.nom %>
+
+Statut : <%= intervention.statut %>
+
 <% unless intervention.users.empty? %>
   <% intervention.users.each do |plaideur| %>
-    Plaideur : <%= "#{plaideur.prenom} #{plaideur.nom}" %> <br>
+    Plaideur : <%= "#{plaideur.prenom} #{plaideur.nom}" %>
+    <% plaideurintervention_instance = PlaideurIntervention.where(intervention_id: intervention.id).where(user_id: plaideur.id).first %>
+    <%= link_to plaideurintervention_path(plaideurintervention_instance), :method => :delete do %>
+      <i class="far fa-trash-alt"></i>
+    <% end %>
   <% end %>
 <% end %>
 
-<!-- au cas ou l'intervention n'a pas de plaideur assigné -->
-<%= form_for(@plaideurintervention) do |f| %>
-  <%= f.label :intervention_id %>
-  <%= f.text_field :intervention_id %>
-  <%= f.label :user_id %>
-  <%= f.text_field :user_id %>
-  <%= f.submit %>
+<%= simple_form_for @plaideurintervention, :url => plaideurinterventions_path, :method => :post do |f| %>
+  <%= f.association :user, collection: @users_list%>
+  <%= f.input :intervention_id, :as => :hidden, :input_html => { :value => intervention.id } %>
+  <%= f.button :submit,'Assigner', class: 'btn-primary'%>
 <% end %>
-
-
-<br>
-<br>
-
 

@@ -5,6 +5,9 @@ class PlaideurinterventionsController < ApplicationController
   def create
     @plaideurintervention = PlaideurIntervention.new(plaideurintervention_params)
     if @plaideurintervention.save
+      intervention = Intervention.find(plaideurintervention_params[:intervention_id].to_i)
+      intervention.statut = "A traiter" if intervention.statut == "Non-assigné"
+      intervention.save
       redirect_to interventions_path
     else
       redirect_to interventions_path

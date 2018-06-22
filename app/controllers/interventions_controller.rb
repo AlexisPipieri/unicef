@@ -4,6 +4,12 @@ class InterventionsController < ApplicationController
   def index
     @interventions = Intervention.all
     @plaideurintervention = PlaideurIntervention.new
+    @pending_interventions = Intervention.where(statut: "A traiter")
+    @active_interventions = Intervention.where(statut: 'En cours')
+    @finished_interventions  = Intervention.where(statut: 'Terminé')
+    @unassigned_interventions = Intervention.where(statut: 'Non-assigné')
+
+
     # search
     if params[:query] && params[:query] != ''
       if @interventions.search_interventions(params[:query]).empty?
@@ -21,13 +27,6 @@ class InterventionsController < ApplicationController
     end
 
     # assign
-    @users_list = User.all
-    @interventions_list = Intervention.all
-  end
-
-  def show
-    @intervention = Intervention.find(params[:id])
-    @plaideurintervention = PlaideurIntervention.new
     @users_list = User.all
   end
 
