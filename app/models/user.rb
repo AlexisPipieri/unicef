@@ -3,6 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  belongs_to :theme
-  has_many :plaideur_interventions
+  belongs_to :theme, optional: true
+  has_many :plaideur_interventions, dependent: :destroy
+
 end
