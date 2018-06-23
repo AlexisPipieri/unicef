@@ -1,1 +1,25 @@
-<%= @plaideurs.first.email %>
+ <%= form_tag plaideurs_path, method: :get do %>
+  <%= text_field_tag :query,
+    params[:query],
+    class: "form-control",
+    placeholder: "Rechercher un plaideur"
+  %>
+<% end %>
+
+ <table>
+ <tr>
+  <th> PRENOM </th>
+  <th> NOM </th>
+  <th> TEL </th>
+  <th> NIVEAU </th>
+ </tr> 
+<% @plaideurs.each do |plaideur| %>
+ <tr> 
+  <td><%= plaideur.prenom %></td>
+  <td><%= plaideur.nom %></td>
+  <td><%= plaideur.tel %></td>
+  <td><%= plaideur.niveau %></td>
+ </tr>
+ <% end %>
+</table>
+

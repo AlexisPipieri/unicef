@@ -6,4 +6,11 @@ class User < ApplicationRecord
   belongs_to :theme, optional: true
   has_many :plaideur_interventions, dependent: :destroy
 
+  include PgSearch
+  pg_search_scope :search_by_prenom_nom,
+  against: [ :prenom, :nom ],
+  using: {
+  tsearch: { prefix: true } 
+  }
+
 end
