@@ -29,14 +29,17 @@ class InterventionsController < ApplicationController
   end
 
   def create
+    # raise
     @intervention = Intervention.new(intervention_params)
     if @intervention.save
       # if user selects a plaideur, then create an instance of plaideurintervention
-      unless params[:intervention][:user_ids].empty?
-        plaideur = User.find(params[:intervention][:user_ids])
-        @plaideurintervention = PlaideurIntervention.new(intervention: @intervention,
-         user: plaideur)
-        @plaideurintervention.save
+      unless plaideur_params.empty?
+        plaideur_params[:user_ids].each do |plaideur_id|
+          plaideur = User.find(plaideur_id)
+          @plaideurintervention = PlaideurIntervention.new(intervention: @intervention,
+           user: plaideur)
+          @plaideurintervention.save
+        end
       end
       redirect_to intervention_path(@intervention)
     else
@@ -53,6 +56,10 @@ class InterventionsController < ApplicationController
   def intervention_params
     params.require(:intervention).permit(:date_contact, :date_intervention,
       :theme_id, :ecole_id)
+  end
+
+  def plaideur_params
+    params.require(:intervention).permit(:user_ids => [])
   end
 
 end

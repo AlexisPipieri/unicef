@@ -5,7 +5,7 @@
     <%= f.association :ecole %>
     <%= f.association :theme, collection: @theme_list %>
     <%= f.input :date_intervention, input_html: {class: "datepicker"} %>
-    <%= f.association :users, as: :collection_select %>
+    <%= f.association :users, include_hidden: false, input_html: { class: 'select2plaideurs' } %>
     <%= f.submit "Ajouter", class: "btn btn-primary" %>
 
   <% end %>
