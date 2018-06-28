@@ -22,17 +22,21 @@
           <div class="intervention-card-plaideur">
             <strong>Plaideur :</strong> <%= "#{plaideur.prenom} #{plaideur.nom}" %>
             <% plaideurintervention_instance = PlaideurIntervention.where(intervention_id: intervention.id).where(user_id: plaideur.id).first %>
-            <%= link_to plaideurintervention_path(plaideurintervention_instance), :method => :delete do %>
-              <i class="fas fa-times"></i>
+            <% if current_user.admin == true %>
+              <%= link_to plaideurintervention_path(plaideurintervention_instance), :method => :delete do %>
+                <i class="fas fa-times"></i>
+              <% end %>
             <% end %>
           </div>
         <% end %>
       <% end %>
     </div>
-    <%= simple_form_for @plaideurintervention, :url => plaideurinterventions_path, :method => :post do |f| %>
-      <%= f.association :user, collection: @users_list, class: "intervention-section" %>
-      <%= f.input :intervention_id, :as => :hidden, :input_html => { :value => intervention.id } %>
-      <%= f.button :submit,'Assigner', class: 'btn-primary'%>
+    <% if current_user.admin == true %>
+      <%= simple_form_for @plaideurintervention, :url => plaideurinterventions_path, :method => :post do |f| %>
+        <%= f.association :user, collection: @users_list, class: "intervention-section" %>
+        <%= f.input :intervention_id, :as => :hidden, :input_html => { :value => intervention.id } %>
+        <%= f.button :submit,'Assigner', class: 'btn-primary'%>
+      <% end %>
     <% end %>
   </div>
 

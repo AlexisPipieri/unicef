@@ -1,12 +1,10 @@
 class PlaideurinterventionsController < ApplicationController
-  skip_before_action :authenticate_user! #à enlever pour mise en prod
 
 
   def create
     @plaideurintervention = PlaideurIntervention.new(plaideurintervention_params)
     if @plaideurintervention.save
       intervention = Intervention.find(plaideurintervention_params[:intervention_id].to_i)
-      intervention.statut = "A traiter" if intervention.statut == "Non-assigné"
       intervention.save
       redirect_to interventions_path
     else
