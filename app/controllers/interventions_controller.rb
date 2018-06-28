@@ -1,7 +1,7 @@
 class InterventionsController < ApplicationController
 
   def index
-    @interventions = Intervention.all
+    @interventions = Intervention.all.sort_by {|intervention| intervention.date_intervention.to_date}
     @plaideurintervention = PlaideurIntervention.new
     @pending_interventions = Intervention.where(statut: "A traiter")
     @active_interventions = Intervention.where(statut: 'En cours')
@@ -19,9 +19,9 @@ class InterventionsController < ApplicationController
           intervention = Intervention.find(plaideurintervention.intervention_id)
           matching_interventions << intervention
         end
-        @interventions = matching_interventions
+        @interventions = matching_interventions.sort_by {|intervention| intervention.date_intervention.to_date}
       else
-        @interventions = @interventions.search_interventions(params[:query])
+        @interventions = @interventions.search_interventions(params[:query]).sort_by {|intervention| intervention.date_intervention.to_date}
       end
     end
 
