@@ -4,10 +4,31 @@
   <div class="search-form" >
     <%= form_tag interventions_path, method: :get do %>
       <input type="text" class="form-control" id="input-interventions-search" placeholder="Chercher une intervention" name="query">
+      <%= submit_tag 'Search', class: 'btn btn-primary' %>
     <% end %>
   </div>
-  <% @interventions.each do |intervention| %>
+
+  <h2>Interventions à assigner</h2>
+  <% @unassigned_interventions.each do |intervention| %>
+    <%= render "shared/intervention_card", intervention: intervention %>
+  <% end %>
+
+  <h2>Interventions à traiter</h2>
+  <% @pending_interventions.each do |intervention| %>
+    <%= render "shared/intervention_card", intervention: intervention %>
+  <% end %>
+
+  <h2>Interventions en cours</h2>
+  <% @active_interventions.each do |intervention| %>
+    <%= render "shared/intervention_card", intervention: intervention %>
+  <% end %>
+
+  <h2>Interventions terminées</h2>
+  <% @finished_interventions.each do |intervention| %>
     <%= render "shared/intervention_card", intervention: intervention %>
   <% end %>
 
 </div>
+
+
+

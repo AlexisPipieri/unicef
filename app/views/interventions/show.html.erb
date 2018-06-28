@@ -1,0 +1,16 @@
+<!-- NOT USED ANYMORE -->
+
+<%= link_to "Back to interventions", interventions_path %>
+
+<div class="container">
+  date: <%= @intervention.date_intervention %>
+
+  <% @intervention.users.each do |plaideur|%>
+    Plaideur: <%= plaideur.nom %>
+  <% end %>
+  <%= simple_form_for [@intervention, @plaideurintervention], :url => intervention_plaideurinterventions_path(@intervention), :method => :post do |f| %>
+    <%#= f.input :user_id %>
+    <%= f.association :user, collection: @users_list%>
+    <%= f.button :submit,'Assigner', class: 'btn-primary'%>
+  <% end %>
+</div>

@@ -46,11 +46,13 @@ end
 
 puts 'Creation plaideur_interventions...'
 plaideur_interventions = {}
+unless sample["plaideur_interventions"].nil?
 sample["plaideur_interventions"].each do |plaideur_intervention|
   user = users[plaideur_intervention["user"]]
   intervention = interventions[plaideur_intervention["intervention"]]
   plaideur_interventions[plaideur_intervention] = PlaideurIntervention.create! plaideur_intervention.slice(
     "user", "intervention").merge(user: user).merge(intervention: intervention)
+  end
 end
 
 

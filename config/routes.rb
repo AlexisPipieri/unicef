@@ -4,8 +4,9 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   resources :interventions, except: [:destroy]
+  resources :plaideurinterventions, only: [:new, :create, :destroy]
   resources :ecoles, except: [:destroy]
   resources :users, except: [:destroy]
-  resources :plaideurinterventions, except: [:show, :index]
+
 
 end
