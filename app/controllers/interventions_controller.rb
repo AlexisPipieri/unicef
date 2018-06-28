@@ -28,8 +28,9 @@ class InterventionsController < ApplicationController
     @theme_list = Theme.all
   end
 
+
+
   def create
-    # raise
     @intervention = Intervention.new(intervention_params)
     if @intervention.save
       # if user selects a plaideur, then create an instance of plaideurintervention
