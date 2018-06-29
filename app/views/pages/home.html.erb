@@ -1,2 +1,55 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<% if user_signed_in? %>
+
+<div class="accueil_content">
+  <div class="accueil_title">
+    <h1>QUE VOULEZ VOUS FAIRE ?</h1>
+  </div>
+  <div class="main-btn">
+  <%= link_to new_user_session_path , class: "text-align" do %>
+  <button type="button" class="btn btn-secondary large_btn">RECHERCHER UNE INTERVENTION</button>
+  <% end %>
+  <%= link_to new_user_session_path , class: "text-align" do %>
+  <button type="button" class="btn btn-secondary large_btn">ENREGISTRER UNE DEMANDE D'INTERVENTION</button>
+  <% end %>
+  </div>
+  <ul>
+  <%= link_to new_user_session_path , class: "text-align" do %>
+  <button type="button" class="btn btn-secondary small_btn">Consulter la liste des plaideurs</button>
+  <% end %>
+   <%= link_to new_user_session_path , class: "text-align" do %>
+  <button type="button" class="btn btn-secondary small_btn">Consulter les statistiques</button>
+  <% end %>
+
+  <% if user_signed_in? %>
+   <%= link_to new_user_session_path , class: "text-align" do %>
+    <button type="button" class="btn btn-secondary small_btn">Gestion du site</button>
+    <% end %>
+  <% end %>
+   <%= link_to new_user_session_path , class: "text-align" do %>
+  <button type="button" class="btn btn-secondary small_btn">Emailing</button>
+  <% end %>
+  </ul>
+</div>
+
+<% else %>
+<div class="home_content">
+  <div class="home_logo">
+    <%= link_to image_tag("logo.png"), image_path("logo.png"), class: "avatar-large" %>
+  </div>
+  <div class="home_title">
+    <h1>BIENVENUE SUR VOTRE SITE</h1>
+  </div>
+
+  <button type="button" class="btn btn-secondary log_in_btn">
+      <%= link_to t(".sign_in", default: "SE CONNECTER"), new_user_session_path, class: "text-align" %>
+  </button>
+  <div class="sign_up_btn">
+    <%= link_to "Créer un compte", new_registration_path(resource_name), class: "navbar-wagon-item navbar-wagon-link" %>
+  </div>
+</div>
+<% end %>
+
+
+
+
+
