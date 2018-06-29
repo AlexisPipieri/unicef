@@ -3,6 +3,10 @@ ecoles:
     adresse: 100 Boulevard Voltaire 75011 Paris
     responsable: Monsieur Martin
     email: ecolevoltaire@wanadoo.fr
+  - nom: Victor hugo
+    adresse: 52 Rue Saint Maur 75011 Paris
+    responsable: Madame Dupont
+    email: ecole-hugo@gmail.com
   - nom: Michelet
     adresse: 100 Boulevard Michelet 75020 Paris
     responsable: Monsieur Dupont
@@ -28,16 +32,16 @@ users:
 interventions:
   - date_contact: 01/06/2018
     date_intervention: 10/09/2018
-    statut: En cours
+    statut: Terminée
     theme: esclavagisme
     ecole: Voltaire
   - date_contact: 10/05/2018
     date_intervention: 27/10/2018
-    statut: Non-assigné
+    statut: Non-assignée
     theme: pauvreté
     ecole: Michelet
-plaideur_interventions:
-  - user: Clafoutis
-    intervention: "01/06/2018"
-  - user: Connard
-    intervention: "01/06/2018"
+  - date_contact: 10/08/2018
+    date_intervention: 27/11/2018
+    statut: Non-assignée
+    theme: pauvreté
+    ecole: Victor hugo

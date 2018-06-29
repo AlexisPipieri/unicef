@@ -1,0 +1,11 @@
+<div class="container">
+  Thème : <%= @intervention.theme.nom %> <br>
+  École : <%= @intervention.ecole.nom %> <br>
+  Date de l'intervention : <%= @intervention.date_intervention %> <br>
+  Plaideurs :
+  <ul>
+    <% @intervention.users.each do |plaideur| %>
+      <li><%= plaideur.nom_complet %></li>
+    <% end %>
+  </ul>
+</div>
