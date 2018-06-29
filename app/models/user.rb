@@ -16,4 +16,11 @@ class User < ApplicationRecord
     "#{prenom} #{nom}"
   end
 
+  include PgSearch
+  pg_search_scope :search_by_prenom_nom,
+  against: [ :prenom, :nom ],
+  using: {
+  tsearch: { prefix: true } 
+  }
+
 end

@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   resources :users, except: [:destroy]
   resources :plaideurinterventions, except: [:show, :index]
 
+
+  get '/plaideurs', to: 'plaideurs#index'
   # API routes
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
