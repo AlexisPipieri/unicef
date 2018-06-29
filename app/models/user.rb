@@ -9,7 +9,7 @@ class User < ApplicationRecord
 
   def to_label
     # method to display the name in simple form association when creating an intervention
-    "#{id} - #{prenom} #{nom}"
+    "#{prenom} #{nom}"
   end
 
 end
