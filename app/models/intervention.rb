@@ -3,7 +3,6 @@ class Intervention < ApplicationRecord
   belongs_to :ecole
   has_many :plaideur_interventions, dependent: :destroy
   has_many :users, through: :plaideur_interventions
-  # accepts_nested_attributes_for :users
 
   include PgSearch
   pg_search_scope :search_interventions,

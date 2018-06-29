@@ -1,22 +1,33 @@
 class InterventionsController < ApplicationController
-  skip_before_action :authenticate_user! # À enlever pour la mise en prod
+
   def index
     @interventions = Intervention.all
-    plaideurinterventions = PlaideurIntervention.all
-    # raise
+    @open_interventions = Intervention.where.not(statut: 'Terminée').sort_by {|intervention| intervention.date_intervention.to_time}
+    @plaideurintervention = PlaideurIntervention.new
+    # @pending_interventions = Intervention.where(statut: "A traiter")
+    # @active_interventions = Intervention.where(statut: 'En cours')
+    @closed_interventions  = Intervention.where(statut: 'Terminée')
+    # @unassigned_interventions = Intervention.where(statut: 'Non-assigné')
+
+
+    # search
     if params[:query] && params[:query] != ''
+      matching_interventions = []
       if @interventions.search_interventions(params[:query]).empty?
-        matching_interventions = []
+        plaideurinterventions = PlaideurIntervention.all
         plaideurinterventions = plaideurinterventions.search_plaideur(params[:query])
         plaideurinterventions.each do |plaideurintervention|
           intervention = Intervention.find(plaideurintervention.intervention_id)
           matching_interventions << intervention
         end
-        @interventions = matching_interventions
       else
-        @interventions = @interventions.search_interventions(params[:query])
+        matching_interventions = @interventions.search_interventions(params[:query])
       end
+      @open_interventions = matching_interventions.select{|intervention| intervention.statut != 'Terminée'}.sort_by {|intervention| intervention.date_intervention.to_time}
+      @closed_interventions = matching_interventions.select{|intervention| intervention.statut == 'Terminée'}.sort_by {|intervention| intervention.date_intervention.to_time}
     end
+    # assign
+    @users_list = User.all
   end
 
   def show
@@ -27,8 +38,6 @@ class InterventionsController < ApplicationController
     @intervention = Intervention.new
     @theme_list = Theme.all
   end
-
-
 
   def create
     @intervention = Intervention.new(intervention_params)
@@ -46,10 +55,6 @@ class InterventionsController < ApplicationController
     else
       render :new
     end
-  end
-
-  def plaideurs
-    # code to have access to plaideurs of an intervention
   end
 
   private

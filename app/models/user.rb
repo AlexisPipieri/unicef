@@ -20,7 +20,7 @@ class User < ApplicationRecord
   pg_search_scope :search_by_prenom_nom,
   against: [ :prenom, :nom ],
   using: {
-  tsearch: { prefix: true } 
+  tsearch: { prefix: true }
   }
 
 end
