@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.4.3'
 
-gem 'pg_search' # for searching interventions
+gem 'pg_search' # for searching interventions & plaideurs
 
 gem 'bootsnap', require: false
 gem 'devise'

@@ -1,13 +1,24 @@
 <div class="container">
   <h1>Toutes les interventions</h1>
-  <%= link_to "Voir toutes les interventions", interventions_path  %>
-  <div class="search-form" >
+  <div class="search-form-interventions" >
     <%= form_tag interventions_path, method: :get do %>
       <input type="text" class="form-control" id="input-interventions-search" placeholder="Chercher une intervention" name="query">
+      <%= submit_tag 'Search', class: 'btn btn-primary' %>
     <% end %>
   </div>
-  <% @interventions.each do |intervention| %>
+  <%= link_to "Voir toutes les interventions", interventions_path  %>
+
+  <h2>Interventions ouvertes</h2>
+  <% @open_interventions.each do |intervention| %>
+    <%= render "shared/intervention_card", intervention: intervention %>
+  <% end %>
+
+  <h2>Interventions terminées</h2>
+  <% @closed_interventions.each do |intervention| %>
     <%= render "shared/intervention_card", intervention: intervention %>
   <% end %>
 
 </div>
+
+
+
