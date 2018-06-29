@@ -3,6 +3,10 @@ ruby '2.4.3'
 
 gem 'pg_search' # for searching interventions & plaideurs
 
+# Admin interface
+gem 'activeadmin', github: 'activeadmin/activeadmin'
+gem 'inherited_resources', github: 'activeadmin/inherited_resources'
+
 gem 'bootsnap', require: false
 gem 'devise'
 gem 'figaro'
