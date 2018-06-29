@@ -8,4 +8,9 @@ class Ecole < ApplicationRecord
     using: {
       tsearch: { prefix: true }
     }
+  
+  def to_label
+    # method to display the name in simple form association when creating an intervention
+    "#{nom}"
+  end
 end

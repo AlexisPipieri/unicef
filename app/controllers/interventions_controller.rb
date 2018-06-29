@@ -30,6 +30,42 @@ class InterventionsController < ApplicationController
     @users_list = User.all
   end
 
+  def show
+    @intervention = Intervention.find(params[:id])
+  end
 
+  def new
+    @intervention = Intervention.new
+    @theme_list = Theme.all
+  end
+
+  def create
+    @intervention = Intervention.new(intervention_params)
+    if @intervention.save
+      # if user selects a plaideur, then create an instance of plaideurintervention
+      unless plaideur_params.empty?
+        plaideur_params[:user_ids].each do |plaideur_id|
+          plaideur = User.find(plaideur_id)
+          @plaideurintervention = PlaideurIntervention.new(intervention: @intervention,
+           user: plaideur)
+          @plaideurintervention.save
+        end
+      end
+      redirect_to intervention_path(@intervention)
+    else
+      render :new
+    end
+  end
+
+  private
+
+  def intervention_params
+    params.require(:intervention).permit(:date_contact, :date_intervention,
+      :theme_id, :ecole_id)
+  end
+
+  def plaideur_params
+    params.require(:intervention).permit(:user_ids => [])
+  end
 
 end

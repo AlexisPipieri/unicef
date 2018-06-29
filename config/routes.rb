@@ -9,4 +9,13 @@ Rails.application.routes.draw do
   resources :users, except: [:destroy]
 
 
+
+  get '/plaideurs', to: 'plaideurs#index'
+  # API routes
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      resources :ecoles, only: :show
+    end
+  end
+
 end
