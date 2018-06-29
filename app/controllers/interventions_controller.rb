@@ -23,7 +23,7 @@ class InterventionsController < ApplicationController
       else
         matching_interventions = @interventions.search_interventions(params[:query])
       end
-      @open_interventions = matching_interventions.select{|intervention| intervention.statut != 'Terminée'}.sort_by {|intervention| intervention.date_intervention.to_time}
+      @open_interventions = matching_interventions.select{|intervention| intervention.statut != 'Terminée' || intervention.statut.nil?}.sort_by {|intervention| intervention.date_intervention.to_time}
       @closed_interventions = matching_interventions.select{|intervention| intervention.statut == 'Terminée'}.sort_by {|intervention| intervention.date_intervention.to_time}
     end
     # assign
