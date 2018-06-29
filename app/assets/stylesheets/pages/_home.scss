@@ -1,1 +1,105 @@
-// Specific CSS for your home-page
+// Specific CSS for your log in/sign up-page
+.home_content {
+  text-align: center;
+  vertical-align: center;
+}
+
+.home_logo {
+  img {
+    width: 800px;
+    margin-top: 50px;
+  }
+}
+
+.home_title {
+  margin-top: 100px;
+  color: #1A9FE0;
+  font-size: 200px;
+
+}
+
+.log_in_btn {
+  margin-top:30px;
+  width: 250px;
+  height: auto;
+  background-color: #FFFFFF;
+  border-radius: 5px;
+  border-color: #89ABBF !important;
+  align-items: center !important;
+  padding: 0px;
+    a {
+      font-size: 30px;
+      text-decoration: none;
+      color: #446D84;
+    }
+}
+ .log_in_btn:hover {
+    a{
+      color: #88CCF1;
+      border-color: #88CCF1;
+
+    }
+  }
+
+.sign_up_btn:hover {
+  a{
+    color: #88CCF1;
+  }
+}
+
+// Specific CSS for your Dashboard-page
+
+.accueil_content {
+  text-align: center;
+  vertical-align: center;
+}
+
+.accueil_title {
+  margin-top: 100px;
+  color: #1A9FE0;
+  font-size: 200px;
+}
+
+.main-btn {
+  display: flex;
+  justify-content: space-around;
+}
+
+// main call to action
+.large_btn {
+    margin-top: 30px;
+    width: 563px;
+    height: 300px;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    border-color: #89ABBF !important;
+    align-items: center !important;
+    padding: 0px;
+}
+
+// second call to action
+
+.small_btn {
+    margin-top: 30px;
+    width: 1200px;
+    height: 50px;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    border-color: #89ABBF !important;
+    align-items: center !important;
+    padding: 0px;
+}
+
+ .small_btn:hover {
+    a{
+      color: #88CCF1;
+      border-color: #88CCF1;
+
+    }
+  }
+
+ul {
+  padding: 0px;
+}
+
+
