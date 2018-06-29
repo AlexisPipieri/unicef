@@ -3,6 +3,9 @@ class InterventionsController < ApplicationController
   def index
     @interventions = Intervention.all
     @open_interventions = Intervention.where.not(statut: 'Terminée').sort_by {|intervention| intervention.date_intervention.to_time}
+    Intervention.where(statut: nil).each do |intervention|
+      @open_interventions << intervention
+    end
     @plaideurintervention = PlaideurIntervention.new
     # @pending_interventions = Intervention.where(statut: "A traiter")
     # @active_interventions = Intervention.where(statut: 'En cours')
