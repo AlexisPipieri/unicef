@@ -3,16 +3,43 @@
 
   <div id="add_intervention_form">
     <%= simple_form_for @intervention do |f| %>
-      <%= f.association :ecole, input_html: {id: "input_ecole"} %>
+    <p class="ecole_title">Coordonnées de l'école</p>
+    <div class="card">
+      <%= f.association :ecole, include_hidden: false, label: false, input_html: {class: 'select2ecoles', id: 'input_ecole'} %>
       <div id="ecole_info">
-        <div id="nom">
-
+        <div id="nom_ecole">
+          Nom de l'école : <span id="nom_ecole_value"></span>
+        </div>
+        <div id="code_ecole">
+          Code école : <span id="code_ecole_value"></span>
+        </div>
+        <div id="type_ecole">
+          Type d'école : <span id="type_ecole_value"></span>
+        </div>
+        <div id="adresse_ecole">
+          Adresse : <span id="adresse_ecole_value"></span>
+        </div>
+        <div id="tel_ecole">
+          Téléphone : <span id="tel_ecole_value"></span>
+        </div>
+        <div id="email_ecole">
+          Email : <span id="email_ecole_value"></span>
+        </div>
+        <div id="responsable_ecole">
+          Responsable : <span id="responsable_ecole_value"></span>
+        </div>
+        <div id="enseignants_ecole">
+          Enseignants : <span id="enseignants_ecole_value"></span>
         </div>
       </div>
-      <%= f.association :theme, collection: @theme_list %>
-      <%= f.input :date_intervention, input_html: {class: "datepicker"} %>
-      <%= f.association :users, include_hidden: false, input_html: { class: 'select2plaideurs' } %>
-      <%= f.submit "Ajouter", class: "btn btn-primary" %>
+    </div>
+    <p class="intervention_title">Demande d'intervention</p>
+    <div class="card">
+      <%= f.association :theme, label: 'Thème', collection: @theme_list, input_html: {class: 'select2themes'} %>
+      <%= f.association :users, include_hidden: false, input_html: { class: 'select2plaideurs' }, label: 'Plaideurs' %>
+      <%= f.input :date_intervention, label: "Date de l'intervention", input_html: {class: "datepicker"} %>
+    </div>
+    <%= f.submit "Créer", class: "btn btn-primary" %>
 
     <% end %>
   </div>
