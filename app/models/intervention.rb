@@ -14,4 +14,6 @@ class Intervention < ApplicationRecord
     using: {
       tsearch: { prefix: true }
     }
+
+
 end

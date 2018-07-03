@@ -12,4 +12,7 @@ class PlaideurIntervention < ApplicationRecord
     using: {
       tsearch: { prefix: true }
     }
+
+
+
 end
