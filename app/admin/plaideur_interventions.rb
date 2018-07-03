@@ -1,3 +1,5 @@
+# TO DELETE WHEN HANDING OVER THE WEBSITE. Even admins should not touch plaideurs_interventions
+
 ActiveAdmin.register PlaideurIntervention do
 
   index do

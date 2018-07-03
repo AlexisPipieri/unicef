@@ -5,10 +5,7 @@ ActiveAdmin.register Intervention do
     column :date_contact
     column :date_intervention
     column "École" do |intervention|
-      "#{intervention.ecole.code} - #{intervention.ecole.nom}"
-    end
-    column "Thème" do |intervention|
-      intervention.theme.nom
+      link_to("#{intervention.ecole.code} - #{intervention.ecole.nom}", admin_ecole_path(intervention.ecole))
     end
     column "Plaideurs" do |intervention|
       intervention.users
