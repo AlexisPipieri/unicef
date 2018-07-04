@@ -8,15 +8,35 @@
   </div>
   <%= link_to "Voir toutes les interventions", interventions_path  %>
 
+  <h2>Interventions non-assignées</h2>
+  <% @unassigned_interventions.each do |intervention| %>
+    <%= render "shared/intervention_card", intervention: intervention %>
+  <% end %>
+
   <h2>Interventions ouvertes</h2>
   <% @open_interventions.each do |intervention| %>
     <%= render "shared/intervention_card", intervention: intervention %>
+  <% end %>
+
+  <% unless @other_interventions.empty? %>
+    <h2>Interventions </h2>
+    <% @other_interventions.each do |intervention| %>
+      <%= render "shared/intervention_card", intervention: intervention %>
+    <% end %>
   <% end %>
 
   <h2>Interventions terminées</h2>
   <% @closed_interventions.each do |intervention| %>
     <%= render "shared/intervention_card", intervention: intervention %>
   <% end %>
+
+<% unless @cancelled_interventions.empty? %>
+  <h2>Interventions annulées</h2>
+  <% @cancelled_interventions.each do |intervention| %>
+    <%= render "shared/intervention_card", intervention: intervention %>
+  <% end %>
+<% end %>
+
 
 </div>
 

@@ -1,17 +1,15 @@
 class InterventionsController < ApplicationController
+  before_action :find_intervention, only: [ :update ]
 
   def index
     @interventions = Intervention.all
-    @open_interventions = Intervention.where.not(statut: 'Terminée').sort_by {|intervention| intervention.date_intervention.to_time}
-    Intervention.where(statut: nil).each do |intervention|
-      @open_interventions << intervention
-    end
-    @plaideurintervention = PlaideurIntervention.new
-    # @pending_interventions = Intervention.where(statut: "A traiter")
-    # @active_interventions = Intervention.where(statut: 'En cours')
-    @closed_interventions  = Intervention.where(statut: 'Terminée')
-    # @unassigned_interventions = Intervention.where(statut: 'Non-assigné')
+    @open_interventions = Intervention.where(statut: 'En cours').sort_by {|intervention| intervention.date_intervention.to_time}
+    @unassigned_interventions = Intervention.where(statut: 'Non-assignée').sort_by {|intervention| intervention.date_intervention.to_time}
+    @closed_interventions  = Intervention.where(statut: 'Terminée').sort_by {|intervention| intervention.date_intervention.to_time}
+    @cancelled_interventions = Intervention.where(statut: 'Annulée').sort_by {|intervention| intervention.date_intervention.to_time}
+    @other_interventions = Intervention.where.not(statut: 'En cours').where.not(statut: 'Non-assignée').where.not(statut: 'Terminée').where.not(statut: 'Annulée').sort_by {|intervention| intervention.date_intervention.to_time}
 
+    @plaideurintervention = PlaideurIntervention.new
 
     # search
     if params[:query] && params[:query] != ''
@@ -34,10 +32,6 @@ class InterventionsController < ApplicationController
 
     # update statut
     @statut_list = ["Non-assignée", "En cours", "Terminée", "Annulée"]
-  end
-
-  def show
-    @intervention = Intervention.find(params[:id])
   end
 
   def new
@@ -64,15 +58,17 @@ class InterventionsController < ApplicationController
   end
 
   def update
-    intervention = Intervention.find(params[:id].to_i)
-    intervention.update_attributes(intervention_params)
-    if intervention.save
+    @intervention.update_attributes(intervention_params)
+    if @intervention.save
       redirect_to interventions_path
     end
   end
 
   private
 
+  def find_intervention
+    @intervention = Intervention.find(params[:id])
+  end
 
   def intervention_params
     params.require(:intervention).permit(:date_contact, :date_intervention,
