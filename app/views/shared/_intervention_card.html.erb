@@ -9,7 +9,7 @@
     <div class="intervention-section intervention-card-statut">
       <% if current_user.admin %>
         <%= simple_form_for intervention do |f| %>
-          <%= f.input :statut, collection: @statut_list %>
+          <%= f.input :statut, collection: @statut_list, include_blank: false, include_hidden: false %>
           <%= f.button :submit,'Mettre à jour', class: 'btn-primary btn-sm'%>
         <% end %>
       <% end %>
