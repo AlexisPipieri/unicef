@@ -31,6 +31,9 @@ class InterventionsController < ApplicationController
     end
     # assign
     @users_list = User.all
+
+    # update statut
+    @statut_list = ["Non-assignée", "En cours", "Terminée", "Annulée"]
   end
 
   def show
@@ -60,19 +63,20 @@ class InterventionsController < ApplicationController
     end
   end
 
-  def edit
-
-  end
-
   def update
-
+    intervention = Intervention.find(params[:id].to_i)
+    intervention.update_attributes(intervention_params)
+    if intervention.save
+      redirect_to interventions_path
+    end
   end
 
   private
 
+
   def intervention_params
     params.require(:intervention).permit(:date_contact, :date_intervention,
-      :theme_id, :ecole_id)
+      :theme_id, :ecole_id, :statut)
   end
 
   def plaideur_params

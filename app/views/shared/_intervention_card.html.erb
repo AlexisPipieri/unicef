@@ -7,7 +7,12 @@
       <strong>Thème :</strong> <%= intervention.theme.nom %>
     </div>
     <div class="intervention-section intervention-card-statut">
-      <strong>Statut :</strong> <%= intervention.statut %>
+      <% if current_user.admin %>
+        <%= simple_form_for intervention do |f| %>
+          <%= f.input :statut, collection: @statut_list %>
+          <%= f.button :submit,'Mettre à jour', class: 'btn-primary'%>
+        <% end %>
+      <% end %>
     </div>
   </div>
   <div class="intervention-section intervention-card-ecole">

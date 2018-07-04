@@ -6,10 +6,8 @@ class PlaideurinterventionsController < ApplicationController
     if @plaideurintervention.save
       intervention = Intervention.find(plaideurintervention_params[:intervention_id].to_i)
       intervention.save
-      redirect_to interventions_path
-    else
-      redirect_to interventions_path
     end
+    redirect_to interventions_path
   end
 
   def destroy
